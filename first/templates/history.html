@@ -7,6 +7,17 @@
 </head>
 <body>
     <h1>История вычислений</h1>
+
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/time/">Текущее время</a></li>
+            <li><a href="/calc/">Калькулятор</a></li>
+            <li><a href="/expression/">Выражение</a></li>
+            <li><a href="/history/">История выражений</a></li>
+        </ul>
+    </nav>
+
     <table border="1">
         <thead>
             <tr>
@@ -23,6 +34,7 @@
             {% endfor %}
         </tbody>
     </table>
+
     <a href="{% url 'expression_page' %}">Сгенерировать новое выражение</a>
 </body>
 </html>
