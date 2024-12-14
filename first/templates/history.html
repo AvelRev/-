@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История вычислений</title>
+</head>
+<body>
+    <h1>История вычислений</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Выражение</th>
+                <th>Результат</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history %}
+                <tr>
+                    <td>{{ record.expression }}</td>
+                    <td>{{ record.result }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'expression_page' %}">Сгенерировать новое выражение</a>
+</body>
+</html>

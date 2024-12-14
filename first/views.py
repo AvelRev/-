@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
+import random
+
+calculation_history = []
 
 def my_page(request):
     context = {
@@ -16,7 +19,6 @@ def time_page(request):
         "time": now.strftime("%H:%M:%S")
     }
     return render(request, "time.html", context)
-
 
 def calc_page(request):
     a = request.GET.get('a', 0)
@@ -41,3 +43,33 @@ def calc_page(request):
     }
 
     return render(request, "calc.html", context)
+
+def expression_page(request):
+    num_terms = random.randint(2, 4)
+    terms = [random.randint(10, 99) for _ in range(num_terms)]
+
+    operators = [random.choice(['+', '-']) for _ in range(num_terms - 1)]
+    expression = ""
+    result = terms[0]
+
+    for i in range(num_terms):
+        expression += str(terms[i])
+        if i < num_terms - 1:
+            expression += " " + operators[i] + " "
+            if operators[i] == '+':
+                result += terms[i + 1]
+            else:
+                result -= terms[i + 1]
+
+    calculation_history.append({"expression": expression + " = " + str(result), "result": result})
+
+    context = {
+        "expression": expression + " = " + str(result)
+    }
+    return render(request, "expression.html", context)
+
+def history_page(request):
+    context = {
+        "history": calculation_history
+    }
+    return render(request, "history.html", context)
