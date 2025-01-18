@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Строка в слова и числа</title>
+</head>
+<body>
+    <h1>Введите строку</h1>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="input_string" rows="4" cols="50"></textarea><br>
+        <button type="submit">Отправить</button>
+    </form>
+
+    {% if word_count is not None %}
+        <h2>Результаты:</h2>
+        <p>Количество слов: {{ word_count }}</p>
+        <p>Количество чисел: {{ number_count }}</p>
+
+        <h3>Слова:</h3>
+        <ul>
+            {% for word in words %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Числа:</h3>
+        <ul>
+            {% for number in numbers %}
+                <li>{{ number }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

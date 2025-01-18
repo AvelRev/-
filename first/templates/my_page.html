@@ -18,6 +18,13 @@
             <li><a href="/calc/">Калькулятор</a></li>
             <li><a href="/expression/">Выражение</a></li>
             <li><a href="/history/">История выражений</a></li>
+            <li><a href="/str2words/">Характеристика слова</a></li>
+            <li><a href="/str_history/">История пользователей</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/logout/">Выход</a></li>
+            {% else %}
+            <li><a href="/login/">Вход</a></li>
+            {% endif %}
 
         </ul>
     </nav>

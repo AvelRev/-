@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+    <h2>Вход</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Имя пользователя:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Войти</button>
+    </form>
+    {% if next %}
+        <p>Вы будете перенаправлены после входа на <a href="{{ next }}">{{ next }}</a>.</p>
+    {% endif %}
+</body>
+</html>

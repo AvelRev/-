@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
 import random
-
 calculation_history = []
-
+from django.contrib.auth.decorators import login_required
 def my_page(request):
     context = {
         "job": "Sigma",
@@ -127,3 +126,64 @@ def add_expression(request):
         "message": message
     }
     return render(request, "add_expression.html", context)
+
+
+import re
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)
+    return redirect('my_page')
+from .models import LogEntry
+@login_required
+def str_history(request):
+    log_entries = LogEntry.objects.filter(user=request.user).order_by('-date', '-time')
+    context = {
+        'log_entries': log_entries,
+    }
+    return render(request, 'str_history.html', context)
+@login_required
+def str2words_page(request):
+    word_count = None
+    number_count = None
+    words = []
+    numbers = []
+
+    if request.method == "POST":
+        input_string = request.POST.get('input_string', '')
+
+        words = re.findall(r'[a-zA-Z0-9]+', input_string)
+        numbers = re.findall(r'\d+', input_string)
+
+        word_count = len(words)
+        number_count = len(numbers)
+
+        current_time = datetime.now()
+        log_data = {
+            "date": current_time.strftime("%d.%m.%Y"),
+            "time": current_time.strftime("%H:%M:%S"),
+            "input_string": input_string,
+            "word_count": word_count,
+            "number_count": number_count,
+            "user": request.user.username if request.user.is_authenticated else "Гость"
+        }
+        log_entry = LogEntry(
+            date=current_time.date(),
+            time=current_time.time(),
+            input_string=input_string,
+            word_count=word_count,
+            number_count=number_count,
+            user=request.user if request.user.is_authenticated else None
+        )
+        log_entry.save()
+
+
+    context = {
+        "word_count": word_count,
+        "number_count": number_count,
+        "words": words,
+        "numbers": numbers,
+    }
+    return render(request, "str2words.html", context)

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>История запросов</title>
+</head>
+<body>
+    <h1>История запросов</h1>
+    {% if log_entries %}
+        <ul>
+            {% for entry in log_entries %}
+                <li>{{ entry.date }} {{ entry.time }}: {{ entry.input_string }} (Слов: {{ entry.word_count }}, Чисел: {{ entry.number_count }})</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>История запросов пуста.</p>
+    {% endif %}
+</body>
+</html>
