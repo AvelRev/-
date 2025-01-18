@@ -73,3 +73,57 @@ def history_page(request):
         "history": calculation_history
     }
     return render(request, "history.html", context)
+def delete_last_expression(request):
+    if calculation_history:
+        calculation_history.pop()
+
+    context = {
+        "message": "Удалено последнее выражение из истории"
+    }
+    return render(request, "delete.html", context)
+def clear_history(request):
+    calculation_history.clear()
+
+    context = {
+        "message": "История выражений очищена"
+    }
+    return render(request, "clear.html", context)
+
+
+def add_expression(request):
+    expression = request.GET.get('expression')
+
+    if expression:
+        terms = []
+        operators = []
+        current_term = ""
+
+        for char in expression:
+            if char.isdigit():
+                current_term += char
+            else:
+                if current_term:
+                    terms.append(int(current_term))
+                    current_term = ""
+                if char in ['+', '-']:
+                    operators.append(char)
+
+        if current_term:
+            terms.append(int(current_term))
+
+        result = terms[0]
+        for i in range(len(operators)):
+            if operators[i] == '+':
+                result += terms[i + 1]
+            else:
+                result -= terms[i + 1]
+
+        calculation_history.append({"expression": expression + " = " + str(result), "result": result})
+        message = "Ваше выражение добавлено."
+    else:
+        message = "Пожалуйста, укажите выражение в URL, например: /new/?expression=ваше_выражение"
+
+    context = {
+        "message": message
+    }
+    return render(request, "add_expression.html", context)
