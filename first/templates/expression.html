@@ -1,23 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expression Page</title>
-</head>
-<body>
-    <h1>Сгенерированное выражение</h1>
-    <p>{{ expression }}</p>
+{% extends 'base.html' %}
 
-    <nav>
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/time/">Текущее время</a></li>
-            <li><a href="/calc/">Калькулятор</a></li>
-            <li><a href="/expression/">Выражение</a></li>
-            <li><a href="/history/">История выражений</a></li>
-        </ul>
-    </nav>
+{% block title %}Сгенерированное выражение{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">Сгенерированное выражение</h1>
+        <p class="text-center">{{ expression }}</p>
+
+        <nav class="mt-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/time/">Текущее время</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/calc/">Калькулятор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/expression/">Выражение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/history/">История выражений</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

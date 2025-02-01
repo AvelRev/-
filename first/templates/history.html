@@ -1,44 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История вычислений</title>
-</head>
-<body>
-    <h1>История вычислений</h1>
+{% extends 'base.html' %}
 
-    <nav>
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/time/">Текущее время</a></li>
-            <li><a href="/calc/">Калькулятор</a></li>
-            <li><a href="/expression/">Выражение</a></li>
-            <li><a href="/history/">История выражений</a></li>
-            <li><a href="/delete/">Удалить последнее выражение</a></li>
-            <li><a href="/clear/">Удалить историю выражений</a></li>
-            <li><a href="/new/">Добавить новое выражение</a></li>
+{% block title %}История вычислений{% endblock %}
 
-        </ul>
-    </nav>
+{% block content %}
+    <div class="container mt-4">
+        <h1 class="text-center">История вычислений</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Выражение</th>
-                <th>Результат</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for record in history %}
+        <nav class="mt-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/time/">Текущее время</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/calc/">Калькулятор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/expression/">Выражение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/history/">История выражений</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/delete/">Удалить последнее выражение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clear/">Удалить историю выражений</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/new/">Добавить новое выражение</a>
+                </li>
+            </ul>
+        </nav>
+
+        <table class="table mt-4">
+            <thead class="thead-light">
                 <tr>
-                    <td>{{ record.expression }}</td>
-                    <td>{{ record.result }}</td>
+                    <th>Выражение</th>
+                    <th>Результат</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for record in history %}
+                    <tr>
+                        <td>{{ record.expression }}</td>
+                        <td>{{ record.result }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{% url 'expression_page' %}">Сгенерировать новое выражение</a>
-</body>
-</html>
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="{% url 'expression_page' %}">Сгенерировать новое выражение</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,28 +1,14 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор суммы</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Калькулятор суммы{% endblock %}
+
+{% block content %}
     <h1>Курс "Промышленное программирование"</h1>
 
-    <!-- Меню -->
-    <nav>
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/time/">Текущее время</a></li>
-            <li><a href="/calc/">Калькулятор</a></li>
-            <li><a href="/expression/">Выражение</a></li>
-            <li><a href="/history/">История выражений.</a></li>
-        </ul>
-    </nav>
-
-    <ul>
-        <li>Первое число: {{ a }}</li>
-        <li>Второе число: {{ b }}</li>
-        <li>Их сумма равна: {{ total }}</li>
+    <h2>Результаты вычислений</h2>
+    <ul class="list-group">
+        <li class="list-group-item">Первое число: {{ a }}</li>
+        <li class="list-group-item">Второе число: {{ b }}</li>
+        <li class="list-group-item">Их сумма равна: {{ total }}</li>
     </ul>
-</body>
-</html>
+{% endblock %}

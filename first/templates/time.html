@@ -1,27 +1,36 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h1>Курс "Промышленное программирование"</h1>
+{% extends 'base.html' %}
 
-    <!-- Меню -->
-    <nav>
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/time/">Текущее время</a></li>
-            <li><a href="/calc/">Калькулятор</a></li>
-            <li><a href="/expression/">Выражение</a></li>
-            <li><a href="/history/">История выражений.</a></li>
+{% block title %}Курс "Промышленное программирование"{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Курс "Промышленное программирование"</h1>
+
+        <!-- Меню -->
+        <nav class="mt-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/time/">Текущее время</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/calc/">Калькулятор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/expression/">Выражение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/history/">История выражений</a>
+                </li>
+            </ul>
+        </nav>
+
+        <ul class="list-group mt-4">
+            <li class="list-group-item">Текущая дата: <strong>{{ date }}</strong></li>
+            <li class="list-group-item">Текущее время: <strong>{{ time }}</strong></li>
         </ul>
-    </nav>
+    </div>
+{% endblock %}
 
-    <ul>
-        <li>Текущая дата: {{ date }}</li>
-        <li>Текущее время: {{ time }}</li>
-    </ul>
-</body>
-</html>

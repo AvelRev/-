@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>История запросов</title>
-</head>
-<body>
-    <h1>История запросов</h1>
-    {% if log_entries %}
-        <ul>
-            {% for entry in log_entries %}
-                <li>{{ entry.date }} {{ entry.time }}: {{ entry.input_string }} (Слов: {{ entry.word_count }}, Чисел: {{ entry.number_count }})</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>История запросов пуста.</p>
-    {% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}История запросов{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">История запросов</h1>
+        
+        {% if log_entries %}
+            <ul class="list-group mt-4">
+                {% for entry in log_entries %}
+                    <li class="list-group-item">
+                        <strong>{{ entry.date }} {{ entry.time }}</strong>: 
+                        {{ entry.input_string }} 
+                        <span class="badge bg-primary">Слов: {{ entry.word_count }}</span>
+                        <span class="badge bg-success">Чисел: {{ entry.number_count }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="mt-4">История запросов пуста.</p>
+        {% endif %}
+    </div>
+{% endblock %}
